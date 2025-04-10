@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="fragments/header :: link"></th:block>
+    <th:block th:replace="fragments/header :: script"></th:block>
+    <th:block th:replace="fragments/header :: style"></th:block>
+    <title>질문 수정</title>
+</head>
+
+<body>
+    <th:block th:replace="fragments/header :: header"></th:block>
+    <div class="container">
+        <hr>
+        <div>
+            배너
+        </div>
+        <div class="first-content">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/qna/qna-list">질문 및 답변</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">글 수정</li>
+                </ol>
+            </nav>
+        </div>
+        <h2>글 수정</h2>
+        <form th:action="@{/qna/qna-update}" method="post" th:object="${qna}">
+            <input type="hidden" th:field="*{no}">
+            <input type="hidden" th:field="*{level}">
+            <input type="hidden" th:field="*{parno}">
+            <div class="mb-3">
+                <label>제목</label>
+                <input type="text" class="form-control" th:field="*{title}" required>
+            </div>
+            <div class="mb-3">
+                <label>내용</label>
+                <textarea class="form-control" th:field="*{content}" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label>작성자</label>
+                <input type="text" class="form-control" th:field="*{author}" required>
+            </div>
+            <button class="btn btn-primary">수정</button>
+        </form>
+    </div>
+    <th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+
+</html>

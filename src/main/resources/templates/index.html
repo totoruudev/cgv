@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+		crossorigin="anonymous"></script>
+	<title>메인 페이지</title>
+</head>
+
+<body>
+	<th:block th:replace="fragments/header :: header"></th:block>
+	<th:block th:replace="fragments/header :: link"></th:block>
+	<th:block th:replace="fragments/header :: script"></th:block>
+	<th:block th:replace="fragments/header :: style"></th:block>
+	<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+		<div class="carousel-indicators">
+			<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+				aria-current="true" aria-label="Slide 1"></button>
+			<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+				aria-label="Slide 2"></button>
+			<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+				aria-label="Slide 3"></button>
+			<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+				aria-label="Slide 4"></button>
+			<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"
+				aria-label="Slide 5"></button>
+		</div>
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<video autoplay muted src="./video/main_v1.mp4" class="d-block w-100" alt="..." type="video/mp4" style="z-index: 1;">
+				<div class="carousel-caption d-none d-md-block">
+					<h5 style="z-index: 2;">승부</h5>
+					<p style="z-index: 3;">평정심을 잃는 순간<br>바둑은 거기서 끝이야</p>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<video autoplay muted src="./video/main_v2.mp4" class="d-block w-100" alt="..." type="video/mp4" style="z-index: 1;">
+				<div class="carousel-caption d-none d-md-block">
+					<h5 style="z-index: 2;">야당</h5>
+					<p style="z-index: 3;">검사도 형사도 약쟁이도<br>모두 그 앞에서 줄을 선다</p>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<video autoplay muted src="./video/main_v3.mp4" class="d-block w-100" alt="..." type="video/mp4" style="z-index: 1;">
+				<div class="carousel-caption d-none d-md-block">
+					<h5 style="z-index: 2;">아마추어</h5>
+					<p style="z-index: 3;">가장 지능적인 복수를 설계하다</p>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<video autoplay muted src="./video/main_v4.mp4" class="d-block w-100" alt="..." type="video/mp4" style="z-index: 1;">
+				<div class="carousel-caption d-none d-md-block">
+					<h5 style="z-index: 2;">베러맨</h5>
+					<p style="z-index: 3;">나를 넘어선 더 나은 나!<br>IT'S SHOWTIME</p>
+				</div>
+			</div>
+			<div class="carousel-item">
+				<video autoplay muted src="./video/main_v5.mp4" class="d-block w-100" alt="..." type="video/mp4" style="z-index: 1;">
+				<div class="carousel-caption d-none d-md-block">
+					<h5 style="z-index: 2;">퇴마록</h5>
+					<p style="z-index: 3;">하늘이 불타던 날,<br>전설이 시작된다</p>
+				</div>
+			</div>
+		</div>
+		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+			data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+			data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Next</span>
+		</button>
+	</div>
+		<div class="container-xl">
+	<div id="carouselExample" class="carousel slide">
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<video src="./images/cgv/main_slide_1.jpg" class="d-block w-100" alt="...">
+			</div>
+			<div class="carousel-item">
+				<video src="./images/cgv/main_slide_2.jpg" class="d-block w-100" alt="...">
+			</div>
+			<div class="carousel-item">
+				<video src="./images/cgv/main_slide_3.jpg" class="d-block w-100" alt="...">
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="container">
+		<p>내용</p>
+		<p>나이: <strong th:text="${age}"></strong></p>
+		<p>이름: <strong th:text="${name}"></strong></p>
+	</div>
+	</div>
+</body>
+
+</html>

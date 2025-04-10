@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<th:block th:replace="fragments/header :: link"></th:block>
+	<th:block th:replace="fragments/header :: script"></th:block>
+	<th:block th:replace="fragments/header :: style"></th:block>
+	<title>회원가입</title>
+</head>
+
+<body>
+	<th:block th:replace="fragments/header :: header"></th:block>
+	<div class="container">
+		<hr>
+		<div>
+			배너
+		</div>
+		<div class="first-content">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="/">Home</a></li>
+					<li class="breadcrumb-item"><a href="">회원</a></li>
+					<li class="breadcrumb-item active" aria-current="page">회원 가입</li>
+				</ol>
+			</nav>
+		</div>
+		<script>
+			function checkId() {
+				const inputId = document.getElementById("id");
+				const ck = document.getElementById("ck");
+				const resultMsg = document.getElementById("idCheckResult");
+
+				if (inputId.value != "") {
+					fetch(`http://localhost:8081/member/checkId?id=${inputId.value}`)
+						.then(response => response.json())  //{"data":false}
+						.then(data => {
+							if (data) {
+								resultMsg.innerText = "이미 사용 중인 아이디입니다."; //메시지 분출
+								resultMsg.style.color = "red"; //인라인스타일적용
+								ck.value = false;
+							} else {
+								resultMsg.innerText = "사용 가능한 아이디입니다."; //메시지 분출
+								resultMsg.style.color = "green"; //인라인스타일적용
+								ck.value = true;
+							}
+						})
+						.catch(error => {
+							resultMsg.innerText = "오류 발생";
+							resultMsg.style.color = "red";
+						});
+				} else {
+					alert("아이디 입력이 되어 있지 않습니다.");
+					inputId.focus();
+				}
+			}
+			function validateForm() {
+				let inputId = document.getElementById("id");
+				let pw1 = document.getElementById("pw1");
+				let pw2 = document.getElementById("pw2");
+				let ck = document.getElementById("ck");
+				let resultMsg = document.getElementById("idCheckResult");
+
+				if (pw1.value != pw2.value) {
+					resultMsg.innerText = "비밀번호와 비밀번호 확인이 일치하지 않습니다.";
+					resultMsg.style.color = "red";
+					pw1.focus();
+					return false;
+				}
+
+				if (ck.value !== "true") {
+					resultMsg.innerText = "아이디 중복 체크를 진행해야 가입이 가능합니다.";
+					resultMsg.style.color = "purple";
+					inputId.focus();
+					return false;
+				}
+
+				return true;
+			}
+		</script>
+		<div class="container">
+			<h2 class="mt-4">회원가입</h2>
+			<hr>
+			<form th:action="@{/member/join}" th:object="${member}" method="post" onsubmit="return validateForm()">
+				<div class="mb-3">
+					<label class="form-label" for="id" style="display:inline-block;">아이디</label>
+					<input type="text" class="form-control" id="id" th:field="*{id}" maxlength="100"
+						style="display:inline-block; width:200px;" required>
+					<button type="button" class="btn btn-outline-secondary" onclick="checkId()">아이디 중복 체크</button>
+				</div>
+				<input type="hidden" name="ck" id="ck" value="false" />
+				<div id="idCheckResult" class="form-text mt-1 mb-1"
+					style="clear:both; height:28px; margin-bottom:20px;"></div>
+				<div class="mb-3">
+					<label class="form-label" for="pw1" style="display:inline-block;">비밀번호</label><br>
+					<input type="password" class="form-control" id="pw1" th:field="*{pw}" style="display:inline-block;" required>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="pw2" style="display:inline-block;">비밀번호 확인</label><br>
+					<input type="password" class="form-control" id="pw2" name="pw2" style="display:inline-block;" required>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="name" style="display:inline-block;">이름</label>
+					<input type="text" class="form-control" id="name" th:field="*{name}" maxlength="50" style="display:inline-block;" required>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="email" style="display:inline-block;">이메일</label>
+					<input type="email" class="form-control" id="email" th:field="*{email}" maxlength="50" style="display:inline-block;" required>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="tel" style="display:inline-block;">연락처</label>
+					<input type="tel" class="form-control" id="tel" th:field="*{tel}" maxlength="50" style="display:inline-block;" required>
+				</div>
+				<div class="mb-3">
+
+				</div>
+				<button type="submit" class="btn btn-success">회원가입</button>
+				<button type="reset" class="btn btn-warning">취소</button>
+			</form>
+		</div>
+	</div>
+	<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+
+</html>

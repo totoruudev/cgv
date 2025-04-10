@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="fragments/header :: link"></th:block>
+    <th:block th:replace="fragments/header :: script"></th:block>
+    <th:block th:replace="fragments/header :: style"></th:block>
+    <title>질문 및 답변 목록</title>
+</head>
+
+<body>
+    <th:block th:replace="fragments/header :: header"></th:block>
+    <div class="container">
+        <hr>
+        <div>
+
+        </div>
+        <div class="first-content">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/qna/qna-list">Q&A</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">목록</li>
+                </ol>
+            </nav>
+        </div>
+        <h2>질문 및 답변 목록</h2>
+        <a href="/qna/qna-ins" class="btn btn-primary mb-3" th:if="${session.loginMember != null}">질문 등록</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>등록일</th>
+                    <th>조회수</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="q : ${qnas}">
+                    <td>
+                        <span th:if="${q.level == 1}" th:text="${q.no}"></span>
+                    </td>
+                    <td>
+                        <span th:if="${q.level == 2}">&nbsp;&nbsp;&nbsp;↳ </span>
+                        <a th:href="@{'/qna/qna-detail/' + ${q.no}}" th:text="${q.title}"
+                            th:if="${session.loginMember != null}"></a>
+                        <span th:text="${q.title}" th:if="${session.loginMember == null}"></span>
+                    </td>
+                    <td th:text="${q.author}"></td>
+                    <td th:text="${#temporals.format(q.resdate, 'yyyy-MM-dd')}"></td>
+                    <td th:text="${q.hits}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+
+</html>

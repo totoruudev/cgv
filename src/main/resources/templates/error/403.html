@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오류 페이지</title>
+	<th:block th:replace="fragments/header :: link"></th:block>
+	<th:block th:replace="fragments/header :: script"></th:block>
+	<th:block th:replace="fragments/header :: style"></th:block>
+	<style>
+	.title { text-align:center; }	
+	.img-wrap { display:block; clear:both; width:800px; margin:0 auto; }
+	.btn-wrap { display:block; clear:both; width:160px; margin:0 auto; }
+	</style>
+</head>
+<body>
+<th:block th:replace="fragments/header :: header"></th:block>	
+<div class="container">
+	<hr>
+	<h2 class="title">해당 요청을 처리할 권한이 없습니다.</h2>
+	<figure class="img-wrap">
+		<img src="/images/error/403.jpg" alt="403 오류" />
+	</figure>
+	<div class="btn-wrap">
+		<a href="/" class="btn btn-primary">메인으로 돌아가기</a>
+	</div>
+</div>
+<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>질문 및 답변 자세히보기</title>
+    <th:block th:replace="fragments/header :: link"></th:block>
+    <th:block th:replace="fragments/header :: script"></th:block>
+    <th:block th:replace="fragments/header :: style"></th:block>
+</head>
+
+<body class="">
+    <th:block th:replace="fragments/header :: header"></th:block>
+    <div class="container">
+        <hr>
+        <div>
+            배너
+        </div>
+        <div class="first-content">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/qna/qna-list">질문 및 답변</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">글 자세히보기</li>
+                </ol>
+            </nav>
+        </div>
+        <h2 th:text="'제목: ' + ${qna.title}"></h2>
+        <p><strong>작성자:</strong> <span th:text="${qna.author}"></span></p>
+        <p><strong>내용:</strong> <span th:text="${qna.content}"></span></p>
+        <span th:if="${qna.level == 1}">
+            <a th:href="@{'/qna/qna-edit/' + ${qna.no}}" class="btn btn-warning"
+                th:if="${session.loginMember.id == qna.author or session.loginMember.id == 'admin'}">수정</a>
+            <a th:href="@{'/qna/qna-delete/' + ${qna.parno}}" class="btn btn-danger"
+                th:if="${session.loginMember.id == qna.author or session.loginMember.id == 'admin'}">삭제</a>
+        </span>
+        <span th:if="${qna.level == 2}">
+            <a th:href="@{'/qna/qna-edit/' + ${qna.no}}" class="btn btn-warning"
+                th:if="${session.loginMember.id == qna.author or session.loginMember.id == 'admin'}">수정</a>
+            <a th:href="@{'/qna/qna-answer/del/' + ${qna.no}}" class="btn btn-danger"
+                th:if="${session.loginMember.id == qna.author or session.loginMember.id == 'admin'}">삭제</a>
+        </span>
+        <a th:href="@{'/qna/qna-list'}" class="btn btn-secondary">목록</a>
+
+        <div th:if="${qna.level == 1}">
+            <hr />
+            <h4>답변 목록</h4>
+            <a th:href="@{'/qna/qna-answer/ins/' + ${qna.no}}" class="btn btn-sm btn-success mb-2">답변 등록</a>
+            <div th:each="answer : ${answers}" class="border p-2 mb-2">
+                <p><strong th:text="${answer.author}"></strong></p>
+                <p th:text="${answer.content}"></p>
+                <a th:href="@{'/qna/qna-edit/' + ${answer.no}}" class="btn btn-sm btn-outline-warning"
+                    th:if="${session.loginMember.id == qna.author or session.loginMember.id == 'admin'}">수정</a>
+                <a th:href="@{'/qna/qna-answer/del/' + ${answer.no}}" class="btn btn-sm btn-outline-danger"
+                    th:if="${session.loginMember.id == qna.author or session.loginMember.id == 'admin'}">삭제</a>
+            </div>
+        </div>
+    </div>
+    <th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+
+</html>

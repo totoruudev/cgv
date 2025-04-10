@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<th:block th:replace="fragments/header :: link"></th:block>
+	<th:block th:replace="fragments/header :: script"></th:block>
+	<title>회원정보수정</title>
+</head>
+
+<body>
+	<th:block th:replace="fragments/header :: header"></th:block>
+	<div class="container">
+		<hr>
+		<div>
+			배너
+		</div>
+		<div class="container">
+			<div class="first-content">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Home</a></li>
+						<li class="breadcrumb-item"><a href="">회원</a></li>
+						<li class="breadcrumb-item active" aria-current="page">회원정보수정</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+		<div class="container">
+			<h2 class="mt-4">회원정보수정</h2>
+			<hr>
+			<form th:action="@{/member/edit}" th:object="${member}" method="post">
+				<input type="hidden" id="no" th:field="*{no}" />
+				<div class="mb-3">
+					<label class="form-label" for="id">아이디</label>
+					<input type="text" class="form-control" id="id" th:field="*{id}" maxlength="100" readonly required>
+				</div>
+				<input type="hidden" id="pw" th:field="*{pw}" />
+				<div class="mb-3">
+					<label class="form-label" for="name">이름</label>
+					<input type="text" class="form-control" id="name" th:field="*{name}" maxlength="50" required>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="email">이메일</label>
+					<input type="email" class="form-control" id="email" th:field="*{email}" maxlength="50" required>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="tel">연락처</label>
+					<input type="tel" class="form-control" id="tel" th:field="*{tel}" maxlength="50" required>
+				</div>
+				<div class="mb-3">
+
+				</div>
+				<button type="submit" class="btn btn-success">수정</button>
+				<button type="reset" class="btn btn-warning">취소</button>
+			</form>
+		</div>
+	</div>
+	<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+
+</html>

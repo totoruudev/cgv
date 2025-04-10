@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q&A</title>
+    <th:block th:replace="fragments/header :: link"></th:block>
+    <th:block th:replace="fragments/header :: script"></th:block>
+    <th:block th:replace="fragments/header :: style"></th:block>
+</head>
+
+<body>
+    <th:block th:replace="fragments/header :: header"></th:block>
+    <div class="container">
+        <hr>
+        <div>
+            배너
+        </div>
+        <div class="first-content">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/qna/qna-list">질문 및 답변</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">답변 작성</li>
+                </ol>
+            </nav>
+        </div>
+        <h2>답변 등록</h2>
+        <form th:action="@{/qna/qna-detail}" method="post" th:object="${qna}">
+            <input type="hidden" th:field="*{level}">
+            <input type="hidden" th:field="*{parno}">
+            <div class="mb-3">
+                <label>제목</label>
+                <input type="text" class="form-control" th:field="*{title}" required>
+            </div>
+            <div class="mb-3">
+                <label>내용</label>
+                <textarea class="form-control" th:field="*{content}" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label>작성자</label>
+                <input type="text" class="form-control" th:field="*{author}" required>
+            </div>
+            <button class="btn btn-success">등록</button>
+        </form>
+    </div>
+    <th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+
+</html>

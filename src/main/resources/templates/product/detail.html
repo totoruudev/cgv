@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<th:block th:replace="fragments/header :: link"></th:block>
+	<th:block th:replace="fragments/header :: script"></th:block>
+	<th:block th:replace="fragments/header :: style"></th:block>
+	<title>상품 상세보기</title>
+</head>
+
+<body>
+	<th:block th:replace="fragments/header :: header"></th:block>
+	<div class="container">
+		<hr>
+		<div>
+			배너
+		</div>
+		<div class="first-content">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="/">Home</a></li>
+					<li class="breadcrumb-item"><a href="/product/list">상품</a></li>
+					<li class="breadcrumb-item"><a href="" th:text="${product.cate}"></a></li>
+					<li class="breadcrumb-item active" aria-current="page">상품 상세보기</li>
+				</ol>
+			</nav>
+		</div>
+		<div class="container">
+			<h2 class="mt-4">상품 상세보기</h2>
+			<hr>
+			<figure>
+				<img th:src="${product.img1}" alt="" />
+			</figure>
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<th>상품번호</th>
+						<td th:text="${product.no}"></td>
+					</tr>
+					<tr>
+						<th>상품명</th>
+						<td th:text="${product.pname}"></td>
+					</tr>
+					<tr>
+						<th>상품 설명</th>
+						<td th:text="${product.comment}"></td>
+					</tr>
+					<tr>
+						<th>가격</th>
+						<td th:text="${product.price2}"></td>
+					</tr>
+					<tr>
+						<th>수량</th>
+						<td th:text="${product.amount}"></td>
+					</tr>
+					<tr>
+						<th>입고일</th>
+						<td th:text="${product.resdate}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="/product/list" class="btn btn-primary">목록</a>
+			<a th:href="@{/product/edit/{no}(no=${product.no})}"
+				th:if="${session.loginMember != null and session.loginMember.id == 'admin'}"
+				class="btn btn-warning">수정</a>
+			<a th:href="@{/product/delete/{no}(no=${product.no})}"
+				th:if="${session.loginMember != null and session.loginMember.id == 'admin'}"
+				class="btn btn-danger">삭제</a>
+		</div>
+	</div>
+	<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+
+</html>
